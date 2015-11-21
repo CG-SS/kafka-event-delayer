@@ -1,7 +1,6 @@
 package cgss.dev.storage.rocksdb;
 
 import cgss.dev.storage.KeyValue;
-import org.rocksdb.RocksDB;
 import org.rocksdb.RocksIterator;
 
 import java.util.Spliterator;

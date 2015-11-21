@@ -17,9 +17,11 @@ public class RocksDBStorage implements KVStorage {
     private final RocksDB rocksDB;
 
     public RocksDBStorage(final String dbPath) throws RocksDBException {
-        final Options options = new Options()
-                .setCreateIfMissing(true);
-        rocksDB = RocksDB.open(options, dbPath);
+        this(RocksDB.open(new Options().setCreateIfMissing(true), dbPath));
+    }
+
+    public RocksDBStorage(final RocksDB rocksDB) {
+        this.rocksDB = rocksDB;
     }
 
     @Override
