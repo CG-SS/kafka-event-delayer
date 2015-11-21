@@ -9,17 +9,8 @@ import java.util.function.Consumer;
 
 class RocksDBValueSpliterator implements Spliterator<KeyValue> {
     private final RocksIterator rocksIterator;
-    private final long estimatedSize;
 
     public RocksDBValueSpliterator(final RocksIterator rocksIterator) {
-        long estimatedSize = 0;
-        for(rocksIterator.seekToFirst(); rocksIterator.isValid(); rocksIterator.next()){
-            estimatedSize++;
-        }
-
-        rocksIterator.seekToFirst();
-
-        this.estimatedSize = estimatedSize;
         this.rocksIterator = rocksIterator;
     }
 
@@ -42,7 +33,7 @@ class RocksDBValueSpliterator implements Spliterator<KeyValue> {
 
     @Override
     public long estimateSize() {
-        return estimatedSize;
+        return Long.MAX_VALUE;
     }
 
     @Override
