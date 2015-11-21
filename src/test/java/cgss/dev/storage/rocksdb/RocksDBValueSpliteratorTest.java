@@ -4,7 +4,6 @@ import cgss.dev.storage.KeyValue;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.junit.Assert;
-import org.rocksdb.RocksDB;
 import org.rocksdb.RocksIterator;
 
 import java.util.*;
