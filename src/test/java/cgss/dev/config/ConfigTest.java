@@ -36,13 +36,9 @@ public class ConfigTest implements ConfigFieldNames {
         setEnv(SINK_TOPICS_FIELD_NAME, "sink-topic");
         setEnv(SOURCE_TOPICS_FIELD_NAME, "source-topic");
         setEnv(CONSUMER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
-        setEnv(CONSUMER_KEY_DESERIALIZER_FIELD_NAME, "org.apache.kafka.common.serialization.ByteArrayDeserializer");
-        setEnv(CONSUMER_VALUE_DESERIALIZER_FIELD_NAME, "org.apache.kafka.common.serialization.ByteArrayDeserializer");
         setEnv(CONSUMER_POLL_INTERVAL, "PT5S");
         setEnv(GROUP_ID_FIELD_NAME, "group-id");
         setEnv(PRODUCER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
-        setEnv(PRODUCER_KEY_SERIALIZER_FIELD_NAME, "org.apache.kafka.common.serialization.ByteArraySerializer");
-        setEnv(PRODUCER_VALUE_SERIALIZER_FIELD_NAME, "org.apache.kafka.common.serialization.ByteArraySerializer");
         setEnv(PRODUCER_POLL_INTERVAL, "PT5S");
         setEnv(TIMESTAMP_FIELD_NAME, "timestamp");
         setEnv(STORAGE_TYPE, "ROCKSDB");
