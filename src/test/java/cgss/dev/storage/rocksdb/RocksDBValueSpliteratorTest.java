@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.rocksdb.RocksIterator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class RocksDBValueSpliteratorTest {
 

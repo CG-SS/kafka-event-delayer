@@ -5,8 +5,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
-import java.lang.reflect.Field;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
