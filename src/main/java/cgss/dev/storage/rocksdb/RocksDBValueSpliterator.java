@@ -33,14 +33,14 @@ class RocksDBValueSpliterator implements Spliterator<KeyValue> {
      */
     @Override
     public boolean tryAdvance(Consumer<? super KeyValue> consumer) {
-        if(!rocksIterator.isValid()){
+        if(rocksIterator == null || !rocksIterator.isValid()){
             return false;
         }
 
         consumer.accept(new KeyValue(rocksIterator.key(), rocksIterator.value()));
         rocksIterator.next();
 
-        return rocksIterator.isValid();
+        return true;
     }
 
     /**

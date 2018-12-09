@@ -82,7 +82,7 @@ public class KafkaSinkThread extends Thread {
     @Override
     public void run() {
         while (!this.isInterrupted()){
-            final ConsumerRecords<byte[], byte[]> consumerRecords = kafkaConsumer.poll(pollIntervalDuration.toMillis());
+            final ConsumerRecords<byte[], byte[]> consumerRecords = kafkaConsumer.poll(pollIntervalDuration);
 
             logger.info(String.format("Got %d records from Kafka.", consumerRecords.count()));
 

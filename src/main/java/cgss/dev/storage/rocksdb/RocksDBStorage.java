@@ -66,7 +66,7 @@ public class RocksDBStorage implements KVStorage {
     @Override
     public void DeleteValue(final byte[] key) throws KVStorageException {
         try {
-            rocksDB.remove(key);
+            rocksDB.delete(key);
         } catch (RocksDBException e) {
             throw new KVStorageException(e);
         }
