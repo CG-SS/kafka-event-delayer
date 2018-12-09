@@ -1,7 +1,9 @@
 package cgss.dev.config;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -29,21 +31,24 @@ public class ConfigTest implements ConfigFieldNames {
         Assert.fail("Should've thrown an InvalidConfigException!");
     }
 
+    @Rule
+    public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
+
     @Test
     public void load_LoadsFromEnv() throws Exception {
         Logger.getLogger(Config.class.getSimpleName()).setLevel(Level.OFF);
 
-        setEnv(SINK_TOPICS_FIELD_NAME, "sink-topic");
-        setEnv(SOURCE_TOPICS_FIELD_NAME, "source-topic");
-        setEnv(CONSUMER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
-        setEnv(CONSUMER_POLL_INTERVAL, "PT5S");
-        setEnv(GROUP_ID_FIELD_NAME, "group-id");
-        setEnv(PRODUCER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
-        setEnv(PRODUCER_POLL_INTERVAL, "PT5S");
-        setEnv(TIMESTAMP_FIELD_NAME, "timestamp");
-        setEnv(STORAGE_TYPE, "ROCKSDB");
-        setEnv(ROCKSDB_PATH, "./db");
-        setEnv(EXPIRY_AGE, "PT5S");
+        environmentVariables.set(SINK_TOPICS_FIELD_NAME, "sink-topic");
+        environmentVariables.set(SOURCE_TOPICS_FIELD_NAME, "source-topic");
+        environmentVariables.set(CONSUMER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
+        environmentVariables.set(CONSUMER_POLL_INTERVAL, "PT5S");
+        environmentVariables.set(GROUP_ID_FIELD_NAME, "group-id");
+        environmentVariables.set(PRODUCER_BOOTSTRAP_SERVERS_FIELD_NAME, "localhost:9092");
+        environmentVariables.set(PRODUCER_POLL_INTERVAL, "PT5S");
+        environmentVariables.set(TIMESTAMP_FIELD_NAME, "timestamp");
+        environmentVariables.set(STORAGE_TYPE, "ROCKSDB");
+        environmentVariables.set(ROCKSDB_PATH, "./db");
+        environmentVariables.set(EXPIRY_AGE, "PT5S");
 
         final Config config = Config.load();
 
@@ -59,15 +64,6 @@ public class ConfigTest implements ConfigFieldNames {
             return;
         }
         Assert.fail("Should've thrown an InvalidConfigException!");
-    }
-
-    private static void setEnv(String key, String value) throws Exception {
-        Map<String, String> env = System.getenv();
-        Class<?> cl = env.getClass();
-        Field field = cl.getDeclaredField("m");
-        field.setAccessible(true);
-        Map<String, String> writableEnv = (Map<String, String>) field.get(env);
-        writableEnv.put(key, value);
     }
 
 }

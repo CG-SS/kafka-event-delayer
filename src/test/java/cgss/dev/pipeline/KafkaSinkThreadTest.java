@@ -57,7 +57,7 @@ public class KafkaSinkThreadTest {
         kafkaSinkThread.start();
 
         try {
-            Thread.sleep(Duration.ofMillis(100).toMillis());
+            Thread.sleep(Duration.ofSeconds(1).toMillis());
         } catch (InterruptedException e) {
             kafkaSinkThread.interrupt();
             throw new RuntimeException(e);

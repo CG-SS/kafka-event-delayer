@@ -4,9 +4,11 @@ import cgss.dev.storage.KVStorageException;
 import cgss.dev.storage.KeyValue;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
+import org.rocksdb.RocksIterator;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -66,7 +68,7 @@ public class RocksDBStorageTest {
 
         Mockito.doAnswer(invocationOnMock -> {
             throw new RocksDBException("RocksDB error");
-        }).when(rocksDBMock).remove(testKey);
+        }).when(rocksDBMock).delete(testKey);
 
         final RocksDBStorage storage = new RocksDBStorage(rocksDBMock);
 

@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.rocksdb.RocksIterator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RocksDBValueSpliteratorTest {
 
@@ -19,21 +20,20 @@ public class RocksDBValueSpliteratorTest {
                 new KeyValue("test-key-3".getBytes(), "test-value-3".getBytes())
         );
 
-        Mockito.when(rocksIteratorMock.isValid()).thenReturn(true, true, true, false);
         Mockito.when(rocksIteratorMock.value()).thenReturn(keyValueList.get(0).getValue(), keyValueList.get(1).getValue(), keyValueList.get(2).getValue());
         Mockito.when(rocksIteratorMock.key()).thenReturn(keyValueList.get(0).getKey(), keyValueList.get(1).getKey(), keyValueList.get(2).getKey());
+        Mockito.when(rocksIteratorMock.isValid()).thenReturn(true, true, true, false);
 
         final RocksDBValueSpliterator spliterator = new RocksDBValueSpliterator(rocksIteratorMock);
 
         final Collection<KeyValue> collectedValues = new ArrayList<>();
-        while (spliterator.tryAdvance(collectedValues::add));
+        while(spliterator.tryAdvance(collectedValues::add));
 
         Assert.assertEquals(keyValueList, collectedValues);
 
         Mockito.verify(rocksIteratorMock, Mockito.times(4)).isValid();
         Mockito.verify(rocksIteratorMock, Mockito.times(3)).value();
         Mockito.verify(rocksIteratorMock, Mockito.times(3)).key();
-        Mockito.verifyNoMoreInteractions(rocksIteratorMock);
     }
 
     @Test
